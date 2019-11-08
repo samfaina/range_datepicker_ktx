@@ -40,7 +40,7 @@ internal class DateRangeMonthView : LinearLayout {
 
     private val dayClickListener = OnClickListener { view ->
         val selectedCal = getSelectedDayFromView(view)
-        if (calendarStyleAttr!!.isEditable && dateRangeCalendarManager!!.isAvailableDate()) {
+        if (calendarStyleAttr!!.isEditable && !dateRangeCalendarManager!!.isDisabledDate(selectedCal)) {
 
             var minSelectedDate = dateRangeCalendarManager!!.minSelectedDate
             var maxSelectedDate = dateRangeCalendarManager!!.maxSelectedDate
@@ -64,7 +64,10 @@ internal class DateRangeMonthView : LinearLayout {
                     minSelectedDate?.let { calendarListener!!.onFirstDateSelected(it) }
                 }
             }
-        } else if (calendarStyleAttr!!.isEditable && !dateRangeCalendarManager!!.isAvailableDate()) {
+        } else if (calendarStyleAttr!!.isEditable && dateRangeCalendarManager!!.isDisabledDate(
+                selectedCal
+            )
+        ) {
             calendarListener!!.onDisabledDateSelected(selectedCal)
         }
     }
@@ -305,8 +308,10 @@ internal class DateRangeMonthView : LinearLayout {
 
 
             } else if (type == DateRangeCalendarManager.RangeType.MIDDLE_DATE) {
-                makeAsRangeDate(container)
-
+                when (dateRangeCalendarManager!!.isDisabledDate(calendar)) {
+                    true -> makeAsDisabledDate(container)
+                    false -> makeAsRangeDate(container)
+                }
 
             } else {
                 enabledDayContainer(container)

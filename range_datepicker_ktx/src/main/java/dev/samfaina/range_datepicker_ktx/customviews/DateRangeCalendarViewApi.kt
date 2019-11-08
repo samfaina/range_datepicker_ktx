@@ -117,4 +117,7 @@ interface DateRangeCalendarViewApi {
      * @param endDate   End date
      */
     fun setSelectableDateRange(startDate: Calendar, endDate: Calendar)
+
+
+    fun getSelectedDateList(): MutableList<Calendar>
 }

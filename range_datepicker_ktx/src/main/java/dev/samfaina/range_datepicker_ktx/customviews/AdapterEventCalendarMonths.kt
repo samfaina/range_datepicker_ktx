@@ -167,4 +167,22 @@ internal class AdapterEventCalendarMonths(
         dateRangeCalendarManager.disabledDates.remove(date)
         notifyDataSetChanged()
     }
+
+
+    fun getSelectedDatesList(): MutableList<Calendar> {
+        var list = mutableListOf<Calendar>()
+        if (dateRangeCalendarManager.minSelectedDate != null && dateRangeCalendarManager.maxSelectedDate != null && dateRangeCalendarManager.maxSelectedDate!!.after(
+                dateRangeCalendarManager.minSelectedDate
+            )
+        ) {
+            var cal = dateRangeCalendarManager.minSelectedDate!!.clone() as Calendar
+            while (!cal.after(dateRangeCalendarManager.maxSelectedDate!!)) {
+                if (!dateRangeCalendarManager.isDisabledDate(cal)) {
+                    list.add(cal.clone() as Calendar)
+                }
+                cal.add(Calendar.DATE, 1)
+            }
+        }
+        return list
+    }
 }

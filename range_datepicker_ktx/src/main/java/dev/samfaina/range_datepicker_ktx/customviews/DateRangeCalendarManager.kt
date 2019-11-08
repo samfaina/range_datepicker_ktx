@@ -88,10 +88,6 @@ internal class DateRangeCalendarManager(
         }
     }
 
-    fun isAvailableDate(): Boolean =
-        minSelectedDate != null && !isDisabledDate(minSelectedDate) && maxSelectedDate != null && !isDisabledDate(
-            maxSelectedDate
-        )
 
     fun isSelectableDate(date: Calendar): Boolean {
         // It would work even if date is exactly equal to one of the end cases

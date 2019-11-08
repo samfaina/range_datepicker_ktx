@@ -13,6 +13,7 @@ import android.widget.RelativeLayout
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.viewpager.widget.ViewPager
 import dev.samfaina.range_datepicker_ktx.R
+import dev.samfaina.range_datepicker_ktx.customviews.CalendarRangeUtils.isDateSame
 import dev.samfaina.range_datepicker_ktx.models.CalendarStyleAttrImpl
 import dev.samfaina.range_datepicker_ktx.models.CalendarStyleAttributes
 import java.text.DateFormatSymbols
@@ -20,7 +21,6 @@ import java.util.*
 
 
 class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
-
 
     private var tvYearTitle: CustomTextView? = null
     private var imgVNavLeft: AppCompatImageView? = null
@@ -263,6 +263,11 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
         adapterEventCalendarMonths!!.deleteDisabledDate(date)
     }
 
+    override fun getSelectedDateList(): MutableList<Calendar> {
+        return adapterEventCalendarMonths!!.getSelectedDatesList()
+    }
+
+
     /**
      * To provide month range to be shown to user. If start month is greater than end month than it will give [IllegalArgumentException].<br></br>
      * By default it will also make selectable date range as per visible month's dates. If you want to customize the selectable date range then
@@ -326,11 +331,6 @@ class DateRangeCalendarView : LinearLayout, DateRangeCalendarViewApi {
         adapterEventCalendarMonths!!.setSelectableDateRange(startDate, endDate)
     }
 
-    private fun isDateSame(one: Calendar, second: Calendar): Boolean {
-        return (one.get(Calendar.YEAR) == second.get(Calendar.YEAR)
-                && one.get(Calendar.MONTH) == second.get(Calendar.MONTH)
-                && one.get(Calendar.DATE) == second.get(Calendar.DATE))
-    }
 
     companion object {
 
