@@ -1,0 +1,2 @@
+include ':app', ':range_datepicker_ktx'
+rootProject.name='RangeDatepicker Sample'
