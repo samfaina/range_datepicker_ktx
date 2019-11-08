@@ -30,6 +30,9 @@ dependencies {
     implementation "androidx.core:core-ktx:$ktx_core_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
+    // threetenabp
+    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
+
     // testing
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
